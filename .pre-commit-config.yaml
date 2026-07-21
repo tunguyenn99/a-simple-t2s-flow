@@ -1,0 +1,20 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 24.3.0
+    hooks:
+      - id: black
+        language_version: python3
+
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: 4.2.2
+    hooks:
+      - id: sqlfluff-lint
+        additional_dependencies:
+          - sqlfluff-templater-dbt==4.2.2
+          - cached_property
+          - jinja2-simple-tags
+          - dbt-core==1.12.0
+          - dbt-duckdb==1.10.1
+        args:
+          - --dialect
+          - duckdb

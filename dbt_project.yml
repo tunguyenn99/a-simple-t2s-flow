@@ -1,0 +1,23 @@
+name: a_simple_t2s_flow
+version: '1.0'
+config-version: 2
+
+profile: a_simple_t2s_flow
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+snapshot-paths: ["snapshots"]
+seed-paths: ["seeds"]
+target-path: "target"
+clean-targets: ["target", "dbt_modules"]
+
+models:
+  a_simple_t2s_flow:
+    bronze:
+      +materialized: table
+    silver:
+      +materialized: table
+    gold:
+      +materialized: table
