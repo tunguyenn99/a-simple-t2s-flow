@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from azure.cosmos import CosmosClient, PartitionKey
 from dotenv import load_dotenv
 
@@ -9,9 +9,6 @@ COSMOS_ENDPOINT = os.getenv("COSMOS_ENDPOINT")
 COSMOS_KEY = os.getenv("COSMOS_KEY")
 COSMOS_DATABASE = os.getenv("COSMOS_DATABASE", "xom_ecom")
 COSMOS_CONTAINER = os.getenv("COSMOS_CONTAINER", "pipeline_runs")
-
-if not all([COSMOS_ENDPOINT, COSMOS_KEY]):
-    raise ValueError("Please configure COSMOS_ENDPOINT and COSMOS_KEY in .env")
 
 
 def get_cosmos_client():
@@ -29,14 +26,27 @@ def ensure_database_and_container(client):
 
 
 def log_pipeline_run(pipeline_id, status, details=None):
-    client = get_cosmos_client()
-    container = ensure_database_and_container(client)
     item = {
         "id": pipeline_id,
         "pipeline_id": pipeline_id,
         "status": status,
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "details": details or {},
     }
-    container.upsert_item(item)
+    if (
+        not COSMOS_ENDPOINT
+        or not COSMOS_KEY
+        or "your-account" in str(COSMOS_ENDPOINT)
+        or "your_cosmos" in str(COSMOS_KEY)
+    ):
+        print(
+            f"[Cosmos DB] Skipping cloud metadata sync (credentials not set). Local run logged: {status}"
+        )
+        return item
+    try:
+        client = get_cosmos_client()
+        container = ensure_database_and_container(client)
+        container.upsert_item(item)
+    except Exception as exc:
+        print(f"[Cosmos DB Warning] Could not log run to Cosmos DB: {exc}")
     return item
