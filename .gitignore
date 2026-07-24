@@ -9,3 +9,7 @@ target/
 dbt_modules/
 *.log
 get-pip.py
+*.egg-info/
+.eggs/
+build/
+dist/
