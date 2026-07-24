@@ -1,0 +1,169 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "id": "rect_oltp",
+      "type": "rectangle",
+      "x": 50,
+      "y": 100,
+      "width": 200,
+      "height": 220,
+      "angle": 0,
+      "strokeColor": "#e056fd",
+      "backgroundColor": "#f8efba",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "roundness": {
+        "type": 3
+      },
+      "isDeleted": false
+    },
+    {
+      "id": "text_oltp",
+      "type": "text",
+      "x": 65,
+      "y": 115,
+      "width": 170,
+      "height": 180,
+      "text": "SQL Server (OLTP)\nSchema: e_commerce\n------------------\n\u2022 customer\n\u2022 ecom_sales\n\u2022 product\n\u2022 region",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "strokeColor": "#2c3e50"
+    },
+    {
+      "id": "arrow1",
+      "type": "arrow",
+      "x": 250,
+      "y": 210,
+      "width": 80,
+      "height": 0,
+      "strokeColor": "#2980b9",
+      "strokeWidth": 2,
+      "roughness": 1,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          80,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "rect_dlt",
+      "type": "rectangle",
+      "x": 330,
+      "y": 140,
+      "width": 210,
+      "height": 140,
+      "angle": 0,
+      "strokeColor": "#2980b9",
+      "backgroundColor": "#dff9fb",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "text_dlt",
+      "type": "text",
+      "x": 345,
+      "y": 155,
+      "width": 180,
+      "height": 110,
+      "text": "DLT Ingestion\ningestion/dlt_pipeline.py\n------------------\n\u2022 PyMSSQL fetch\n\u2022 Full refresh load",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "left"
+    },
+    {
+      "id": "arrow2",
+      "type": "arrow",
+      "x": 540,
+      "y": 210,
+      "width": 80,
+      "height": 0,
+      "strokeColor": "#27ae60",
+      "strokeWidth": 2,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          80,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "rect_dwh",
+      "type": "rectangle",
+      "x": 620,
+      "y": 80,
+      "width": 240,
+      "height": 260,
+      "strokeColor": "#27ae60",
+      "backgroundColor": "#e15f4115",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "text_dwh",
+      "type": "text",
+      "x": 635,
+      "y": 95,
+      "width": 210,
+      "height": 230,
+      "text": "DuckDB Warehouse\ndata/warehouse.duckdb\n------------------\n[Bronze] Raw xom_ecom\n[Silver] Cleaned & Joined\n[Gold] 15 Business Models\n(dbt Core Transformations)",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "left"
+    },
+    {
+      "id": "rect_orch",
+      "type": "rectangle",
+      "x": 330,
+      "y": 340,
+      "width": 530,
+      "height": 110,
+      "strokeColor": "#8e44ad",
+      "backgroundColor": "#f3a68320",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "text_orch",
+      "type": "text",
+      "x": 350,
+      "y": 355,
+      "width": 490,
+      "height": 80,
+      "text": "Orchestration & Audit Logging (orchestration/orchestrator.py)\n--------------------------------------------------------------\n\u2022 Triggers Ingestion & dbt Runs  |  \u2022 Upserts Run Metadata to Azure Cosmos DB",
+      "fontSize": 15,
+      "fontFamily": 1,
+      "textAlign": "left"
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  }
+}
