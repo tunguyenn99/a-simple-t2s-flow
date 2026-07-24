@@ -59,6 +59,7 @@ flowchart TB
 | **5. Code Quality** | Black & SQLFluff | Code formatting for Python (`black`) and SQL linting for dbt models (`sqlfluff` with duckdb dialect). |
 | **6. Orchestration & Workflow** | Astronomer Cosmos (Airflow) | Orchestrates dbt models natively inside Apache Airflow as modular DAG task groups with workflow dependency management. |
 | **7. Analytics Output** | Python (Matplotlib/Seaborn) | Automatically queries Gold models and generates executive dashboards saved in `docs/chart_generation/charts/`. |
+| **8. Text-to-SQL Engine** | Python + Google Gemini + DuckDB | Translates natural language questions into validated DuckDB SQL queries and returns formatted results. |
 
 ---
 
@@ -74,6 +75,13 @@ a-simple-t2s-flow/
 │   ├── __init__.py
 │   ├── orchestrator.py            # Main ETL workflow coordinator script
 │   └── cosmos_orchestrator.py     # Astronomer Cosmos Airflow DAG integration
+│
+├── text2sql/                      # 🤖 Text-to-SQL (T2S) Natural Language Query Engine
+│   ├── __init__.py
+│   ├── schema.py                  # DDL Schema Introspector for LLM Context
+│   ├── generator.py               # Gemini LLM & Fallback Rule-based SQL Generator
+│   ├── executor.py                # Safe DuckDB SQL Execution Engine
+│   └── cli.py                     # Rich Interactive Terminal CLI Shell
 │
 ├── dbt_model/                     # 🗄️ All dbt models & transformation assets
 │   ├── models/                    # Bronze, Silver, and Gold SQL models

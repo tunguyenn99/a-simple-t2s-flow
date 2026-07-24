@@ -39,8 +39,11 @@ orchestrate: ## Run full end-to-end ETL orchestrator workflow
 charts: ## Generate business analytics dashboard charts
 	$(PYTHON) docs/chart_generation/generate_charts.py
 
+text2sql: ## Run interactive Text-to-SQL query interface
+	$(PYTHON) -m text2sql.cli --interactive
+
 format: ## Format Python codebase using Black
-	$(BLACK) ingestion/ orchestration/ docs/chart_generation/
+	$(BLACK) ingestion/ orchestration/ docs/chart_generation/ text2sql/
 
 lint: ## Lint dbt SQL models using SQLFluff
 	$(SQLFLUFF) lint dbt_model/models --dialect duckdb
@@ -49,7 +52,7 @@ lint-fix: ## Automatically fix dbt SQL formatting issues using SQLFluff
 	$(SQLFLUFF) fix dbt_model/models --dialect duckdb
 
 check-all: ## Run Python formatting check and SQL linting
-	$(BLACK) --check ingestion/ orchestration/ docs/chart_generation/
+	$(BLACK) --check ingestion/ orchestration/ docs/chart_generation/ text2sql/
 	$(SQLFLUFF) lint dbt_model/models --dialect duckdb
 
 run-all: ingest dbt-run charts ## Run full pipeline end-to-end (Ingest -> dbt -> Charts)
