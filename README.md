@@ -208,11 +208,69 @@ make check-all
 | `make dbt-clean` | Clean compiled dbt target artifacts |
 | `make orchestrate` | Run full ETL orchestrator workflow |
 | `make charts` | Generate Gold analytics dashboard images |
+| `make text2sql` | Run interactive Text-to-SQL CLI query shell |
 | `make format` | Format Python code using `black` |
 | `make lint` | Lint SQL models using `sqlfluff` |
 | `make lint-fix` | Auto-fix SQL formatting using `sqlfluff` |
 | `make check-all` | Verify Python formatting and SQL linting |
 | `make run-all` | Run entire pipeline end-to-end (`ingest` ➔ `dbt-run` ➔ `charts`) |
+
+---
+
+## 🤖 Text-to-SQL (T2S) Natural Language Query Engine
+
+The **Text-to-SQL Engine** (`text2sql/`) allows users and data analysts to query the **DuckDB Data Warehouse** using natural language questions in English or Vietnamese without writing complex SQL manually.
+
+```mermaid
+flowchart TD
+    A[👤 Natural Language Prompt<br/>"Top 5 products by revenue"] --> B[1. DDL Schema Introspector<br/>text2sql/schema.py]
+    B -->|DuckDB DDL Context| C[2. SQL Generator Engine<br/>text2sql/generator.py]
+    C -->|Gemini LLM / Fallback Rule| D[3. SQL Validator & Formatter<br/>sqlglot Transpiler]
+    D -->|Validated SQL Query| E[4. Safe Read-Only Executor<br/>text2sql/executor.py]
+    E -->|Read-Only Execution| F[(DuckDB Warehouse<br/>warehouse.duckdb)]
+    F -->|Data Result & Metadata| G[5. Rich Interactive CLI UI<br/>text2sql/cli.py]
+```
+
+### 🧱 Core Components Breakdown
+
+| Component | File Path | Primary Function |
+| :--- | :--- | :--- |
+| **Schema Introspector** | `text2sql/schema.py` | Automatically extracts DDL definitions, table schemas, and data types from `duckdb_warehouse/warehouse.duckdb` to supply rich context to the LLM. |
+| **SQL Generator** | `text2sql/generator.py` | Uses **Google Gemini API** (`google-genai` model `gemini-2.5-flash`) for LLM query generation, with fallback rules for offline execution and `sqlglot` query formatting. |
+| **Safe Query Executor** | `text2sql/executor.py` | Executes SQL queries in DuckDB read-only mode (`read_only=True`), blocks destructive operations (`DROP`, `DELETE`, `UPDATE`), and records execution time. |
+| **Interactive CLI Shell** | `text2sql/cli.py` | Provides a rich terminal user interface with SQL syntax highlighting and formatted result tables. |
+
+---
+
+### 💻 How to Run the Text-to-SQL Engine
+
+#### Option 1: Interactive Terminal Shell (Recommended)
+```bash
+# Using Makefile shortcut:
+make text2sql
+
+# OR using global CLI shortcut:
+text2sql -i
+
+# OR using Python module:
+python -m text2sql.cli --interactive
+```
+
+#### Option 2: Single-Question Direct Query
+```bash
+# Global CLI shortcut from any directory:
+text2sql "Top 5 products by revenue"
+
+# OR using Python module:
+python -m text2sql.cli "What is the total revenue and profit?"
+```
+
+#### 💡 Sample Questions to Try:
+- `"What is the total revenue and profit?"`
+- `"Show revenue and profit by customer segment"`
+- `"Which market has the highest profit margin?"`
+- `"Top 10 best selling products"`
+- `"Show customers with high churn risk"`
 
 ---
 
