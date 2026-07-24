@@ -5,9 +5,8 @@ with raw as (
 )
 
 select
-    product_id,
-    product_name,
+    product_code as product_id,
+    product as product_name,
     category,
-    try_cast(list_price as double) as list_price,
-    try_cast(cost as double) as product_cost
+    subcategory
 from raw

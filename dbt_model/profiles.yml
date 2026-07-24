@@ -3,7 +3,7 @@ a_simple_t2s_flow:
   outputs:
     dev:
       type: duckdb
-      path: "{{ env_var('DUCKDB_PATH', 'data/warehouse.duckdb') }}"
+      path: "{{ env_var('DUCKDB_PATH', 'duckdb_warehouse/warehouse.duckdb') }}"
       threads: 1
       schema: main
       extensions: []

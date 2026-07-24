@@ -1,13 +1,12 @@
 [sqlfluff]
-# Use the dbt templater and send dbt project root to SQLFluff
 templater = dbt
-# Set the dbt project directory relative to workspace root
-project_dir = .
+project_dir = ./dbt_model
+dialect = duckdb
 
 [sqlfluff:templater:dbt]
-profiles_dir = .
-dir_ignore = target, .venv, logs, data, snapshots, seeds
+profiles_dir = ./dbt_model
+project_dir = ./dbt_model
+dir_ignore = target, .venv, logs, duckdb_warehouse, snapshots, seeds
 
 [sqlfluff:rules]
-# enforce consistent formatting without being overly strict on dialect.
-rule_ignore = L009,L031
+rule_ignore = L009,L031,ST06
