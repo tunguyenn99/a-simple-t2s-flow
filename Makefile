@@ -39,8 +39,10 @@ orchestrate: ## Run full end-to-end ETL orchestrator workflow
 charts: ## Generate business analytics dashboard charts
 	$(PYTHON) docs/chart_generation/generate_charts.py
 
+export PYTHONPATH := .
+
 text2sql: ## Run interactive Text-to-SQL query interface
-	$(PYTHON) -m text2sql.cli --interactive
+	PYTHONPATH=. $(PYTHON) -m text2sql.cli --interactive
 
 format: ## Format Python codebase using Black
 	$(BLACK) ingestion/ orchestration/ docs/chart_generation/ text2sql/
