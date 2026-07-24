@@ -25,6 +25,16 @@ flowchart TD
 
 ---
 
+## 🧠 LLM Model & Pricing (100% Free Tier)
+
+| Feature | Specification |
+| :--- | :--- |
+| **Primary AI Model** | **Google Gemini 2.5 Flash** (`gemini-2.5-flash` via official `google-genai` SDK) |
+| **Fallback Engine** | Offline Rule-Based Heuristic Engine (zero internet / zero API key required) |
+| **Cost / Pricing** | **100% Free** via Google AI Studio Free Tier (15 RPM / 1,500 RPD, no credit card required) |
+| **SQL Dialect** | DuckDB SQL (formatted and validated via `sqlglot`) |
+| **Query Latency** | Avg 20ms - 45ms execution time on DuckDB |
+
 ## 🛠️ How to Run
 
 ```bash

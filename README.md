@@ -242,6 +242,15 @@ flowchart TD
 
 ---
 
+### 🧠 LLM Model & Pricing Specifications
+
+- **Primary AI Model**: **Google Gemini 2.5 Flash** (`gemini-2.5-flash` via official `google-genai` SDK).
+- **Fallback Engine**: Offline Rule-Based Heuristic Engine (zero internet / zero API key required).
+- **Cost / Pricing**: **100% Free** via Google AI Studio Free Tier (15 Requests/Min, 1,500 Requests/Day, no credit card required).
+- **Dialect & Validation**: DuckDB SQL (formatted and validated via `sqlglot`).
+
+---
+
 ### 💻 How to Run the Text-to-SQL Engine
 
 #### Option 1: Interactive Terminal Shell (Recommended)
