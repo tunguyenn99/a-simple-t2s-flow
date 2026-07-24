@@ -1,3 +1,28 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "a-simple-t2s-flow"
+version = "0.1.0"
+description = "E-Commerce Data Warehouse Pipeline & Text-to-SQL Engine"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "duckdb",
+    "google-genai",
+    "pandas",
+    "rich",
+    "sqlglot"
+]
+
+[project.scripts]
+text2sql = "text2sql.cli:main"
+t2s = "text2sql.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
 [tool.black]
 line-length = 88
 target-version = ['py312']
