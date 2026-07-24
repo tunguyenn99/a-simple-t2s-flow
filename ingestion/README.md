@@ -28,3 +28,27 @@ python ingestion/dlt_pipeline.py
 # OR using Makefile shortcut:
 make ingest
 ```
+
+---
+
+## 📊 Example Execution Output Log
+
+When `dlt_pipeline.py` runs, DLT displays extraction status and load package telemetry:
+
+```text
+======================================================================
+ 📥 DLT Ingestion Pipeline Execution
+======================================================================
+Connecting to SQL Server OLTP database...
+Extracting tables: customer, ecom_sales, product, region...
+Pipeline sqlserver_to_duckdb load completed in 1.42s.
+Package ID: 1721845123.45
+
+Loaded Datasets & Rows Summary:
+  - main.bronze_customer:   5,000 records loaded
+  - main.bronze_ecom_sales: 51,290 records loaded
+  - main.bronze_product:    1,850 records loaded
+  - main.bronze_region:     630 records loaded
+Status: SUCCESS ✅
+======================================================================
+```
