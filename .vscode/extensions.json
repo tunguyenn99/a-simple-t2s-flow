@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.black-formatter",
+    "sqlfluff.vscode-sqlfluff",
+    "innoverio.vscode-dbt-power-user",
+    "bierner.markdown-mermaid"
+  ]
+}
