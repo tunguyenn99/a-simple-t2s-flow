@@ -8,10 +8,10 @@ This directory contains the **Text-to-SQL Natural Language Query Engine**, which
 
 ```mermaid
 flowchart TD
-    A[User Question] --> B[schema.py<br/>Schema Introspector]
-    B --> C[generator.py<br/>Gemini LLM / Fallback Rule]
-    C --> D[executor.py<br/>Safe Read-Only DuckDB Execution]
-    D --> E[cli.py<br/>Rich Terminal Shell]
+    A["User Question"] --> B["schema.py<br/>Schema Introspector"]
+    B --> C["generator.py<br/>Gemini LLM / Fallback Rule"]
+    C --> D["executor.py<br/>Safe Read-Only DuckDB Execution"]
+    D --> E["cli.py<br/>Rich Terminal Shell"]
 ```
 
 ### 🧱 Script Breakdown

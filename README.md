@@ -223,12 +223,12 @@ The **Text-to-SQL Engine** (`text2sql/`) allows users and data analysts to query
 
 ```mermaid
 flowchart TD
-    A[👤 Natural Language Prompt<br/>"Top 5 products by revenue"] --> B[1. DDL Schema Introspector<br/>text2sql/schema.py]
-    B -->|DuckDB DDL Context| C[2. SQL Generator Engine<br/>text2sql/generator.py]
-    C -->|Gemini LLM / Fallback Rule| D[3. SQL Validator & Formatter<br/>sqlglot Transpiler]
-    D -->|Validated SQL Query| E[4. Safe Read-Only Executor<br/>text2sql/executor.py]
-    E -->|Read-Only Execution| F[(DuckDB Warehouse<br/>warehouse.duckdb)]
-    F -->|Data Result & Metadata| G[5. Rich Interactive CLI UI<br/>text2sql/cli.py]
+    A["👤 Natural Language Prompt<br/>e.g. Top 5 products by revenue"] --> B["1. DDL Schema Introspector<br/>text2sql/schema.py"]
+    B -->|DuckDB DDL Context| C["2. SQL Generator Engine<br/>text2sql/generator.py"]
+    C -->|Gemini LLM / Fallback Rule| D["3. SQL Validator & Formatter<br/>sqlglot Transpiler"]
+    D -->|Validated SQL Query| E["4. Safe Read-Only Executor<br/>text2sql/executor.py"]
+    E -->|Read-Only Execution| F[("DuckDB Warehouse<br/>warehouse.duckdb")]
+    F -->|Data Result & Metadata| G["5. Rich Interactive CLI UI<br/>text2sql/cli.py"]
 ```
 
 ### 🧱 Core Components Breakdown
