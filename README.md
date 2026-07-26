@@ -1,6 +1,9 @@
 # 🚀 a-simple-t2s-flow (E-Commerce Data Warehouse Pipeline)
 
+[![CI Pipeline](https://github.com/tunguyenn99/a-simple-t2s-flow/actions/workflows/ci.yml/badge.svg)](https://github.com/tunguyenn99/a-simple-t2s-flow/actions/workflows/ci.yml)
+
 > **Modern End-to-End Data Pipeline**: Extracting e-commerce transaction data from **SQL Server OLTP** via **DLT (Data Load Tool)**, storing & transforming data in **DuckDB Warehouse** with **dbt (Bronze → Silver → Gold Medallion Architecture)**, and orchestrating workflow DAGs with **Astronomer Cosmos (Apache Airflow)**.
+
 
 ---
 
