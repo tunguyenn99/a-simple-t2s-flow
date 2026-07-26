@@ -10,42 +10,41 @@
 
 > 🎨 *Overall Modern Data Stack Architecture diagram designed for End-to-End E-Commerce Data Processing.*
 
-### 🔄 Data Flow Pipeline
+### 🔄 System Architecture & Data Pipeline
 
 ```mermaid
-flowchart TB
-    subgraph Source ["1. Source Data Layer"]
-        A[SQL Server OLTP<br/>xomdata_dataset]
+flowchart TD
+    subgraph DataSources ["1. Source Layer"]
+        OLTP["SQL Server OLTP<br/>(Transactional DB)"]
     end
 
-    subgraph Ingestion ["2. Ingestion Layer"]
-        B[DLT Engine<br/>dlt_pipeline.py]
+    subgraph IngestionLayer ["2. Ingestion Layer"]
+        DLT["DLT Engine<br/>ingestion/dlt_pipeline.py"]
     end
 
-    subgraph Warehouse ["3. DuckDB Warehouse (Medallion Architecture)"]
-        C[(Bronze Layer<br/>Raw Staging)] --> D[(Silver Layer<br/>Cleaned & Typed)]
-        D --> E[(Gold Layer<br/>Business Aggregates)]
+    subgraph WarehouseLayer ["3. DuckDB Warehouse (Medallion Architecture)"]
+        Bronze[("Bronze Layer<br/>Raw Staging")]
+        Silver[("Silver Layer<br/>Cleaned & Typed")]
+        Gold[("Gold Layer<br/>Business Analytics Marts")]
+        Bronze -->|dbt transform| Silver -->|dbt transform| Gold
     end
 
-    subgraph Governance ["4. Code Quality & Transformation"]
-        F[dbt Core]
-        G[Black & SQLFluff]
+    subgraph OrchestrationLayer ["4. Orchestration & Code Quality"]
+        Airflow["Astronomer Cosmos / Airflow<br/>orchestration/"]
+        Quality["Black & SQLFluff Tooling"]
     end
 
-    subgraph Workflow ["5. Orchestration & DAGs"]
-        H[Astronomer Cosmos<br/>Apache Airflow] --> I[dbt DAG Task Groups]
+    subgraph ServingLayer ["5. Analytics & Serving Layer"]
+        Charts["Analytics Dashboards<br/>docs/chart_generation/"]
+        T2S["Text-to-SQL Engine<br/>text2sql/ (Gemini LLM)"]
     end
 
-    subgraph Analytics ["6. Analytics & Visualization"]
-        J[Chart Generator<br/>generate_charts.py] --> K[Executive Dashboards]
-    end
-
-    A -->|Extract| B
-    B -->|Load| C
-    F -->|Transform| C
-    G -->|Format & Lint| F
-    H -->|Schedule & Run| F
-    E -->|Query| J
+    OLTP -->|Extract| DLT
+    DLT -->|Load| Bronze
+    Airflow -->|Orchestrate dbt| WarehouseLayer
+    Quality -->|Code Linting| Airflow
+    Gold -->|Query Data| Charts
+    Gold -->|Query Data| T2S
 ```
 
 ### 🧱 Architectural Components Breakdown
