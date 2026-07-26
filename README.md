@@ -437,5 +437,6 @@ Let's connect, share insights, and discuss Modern Data Stack engineering, dbt, D
 Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="center">
-  <i>Built with ❤️ by <b>Tu Nguyen</b> & the <b>Xóm Data</b> Community</i>
+  <i>Built with ❤️ by <b>Tu Nguyen</b> from <b>Xóm Data</b></i>
 </p>
+
