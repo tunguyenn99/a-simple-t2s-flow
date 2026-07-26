@@ -2,9 +2,51 @@ version: 2
 
 sources:
   - name: raw
-    schema: xom_ecom
+    description: "Raw transactional data ingested from SQL Server OLTP database into DuckDB staging via DLT pipeline."
+    schema: main
     tables:
       - name: customer
+        description: "Raw customer source table."
       - name: ecom_sales
+        description: "Raw ecom_sales source table."
       - name: product
+        description: "Raw product source table."
       - name: region
+        description: "Raw region source table."
+
+models:
+  - name: bronze_customer
+    description: "Bronze Layer: Raw customer staging table loaded directly from SQL Server customer source."
+    columns:
+      - name: customer_id
+        description: "Primary identifier for the customer."
+        tests:
+          - not_null
+      - name: first_name
+        description: "Customer's first name."
+      - name: last_name
+        description: "Customer's last name."
+
+  - name: bronze_ecom_sales
+    description: "Bronze Layer: Raw sales transactions staging table loaded from SQL Server ecom_sales source."
+    columns:
+      - name: order_id
+        description: "Unique order transaction identifier."
+      - name: customer_id
+        description: "Foreign key referencing the customer."
+      - name: order_date
+        description: "Timestamp when order was placed."
+
+  - name: bronze_product
+    description: "Bronze Layer: Raw product catalog staging table."
+    columns:
+      - name: product_id
+        description: "Unique product catalog SKU identifier."
+        tests:
+          - not_null
+
+  - name: bronze_region
+    description: "Bronze Layer: Raw geographic location staging table."
+    columns:
+      - name: country_id
+        description: "Unique country reference identifier."
