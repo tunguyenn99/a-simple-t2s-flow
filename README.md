@@ -418,3 +418,24 @@ Charts are generated automatically from live Gold tables in DuckDB via `python d
 | **8. Customer RFM Segments** | ![RFM](docs/chart_generation/charts/08_rfm_segments.png) |
 | **9. Loss Orders Distribution** | ![Loss Orders](docs/chart_generation/charts/09_loss_orders_by_segment.png) |
 | **10. Gender & Occupation Distribution** | ![Demographics](docs/chart_generation/charts/10_customers_gender_occupation.png) |
+
+---
+
+## 🤝 Connect & Community
+
+Let's connect, share insights, and discuss Modern Data Stack engineering, dbt, DuckDB, Airflow, and Text-to-SQL AI architectures!
+
+| Platform | Link | Description |
+| :--- | :--- | :--- |
+| 💼 **LinkedIn** | [Tu Nguyen (`tunguyenn99`)](https://www.linkedin.com/in/tunguyenn99/) | Connect on LinkedIn for Data Engineering insights & discussions |
+| 🌐 **Facebook Community** | [Xóm Data (`xomdata`)](https://www.facebook.com/xomdata) | Join the Xóm Data Community for Data Analysts, Data Engineers & Data Enthusiasts |
+
+---
+
+### 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+<p align="center">
+  <i>Built with ❤️ by <b>Tu Nguyen</b> & the <b>Xóm Data</b> Community</i>
+</p>
