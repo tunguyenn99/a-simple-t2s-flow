@@ -18,7 +18,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "black>=24.0.0",
+    "black==24.3.0",
     "sqlfluff",
     "sqlfluff-templater-dbt",
     "dbt-duckdb"
