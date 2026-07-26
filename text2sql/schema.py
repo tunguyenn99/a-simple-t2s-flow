@@ -22,12 +22,7 @@ def get_warehouse_schema(db_path: str = DEFAULT_DB_PATH) -> str:
         schema_ddl = []
         for (table_name,) in tables:
             cols = conn.execute(
-                f"""
-                SELECT column_name, data_type 
-                FROM information_schema.columns 
-                WHERE table_name = '{table_name}' AND table_schema = 'main'
-                ORDER BY ordinal_position
-            """
+                f"SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '{table_name}' AND table_schema = 'main' ORDER BY ordinal_position"
             ).fetchall()
 
             col_defs = [f"  {col} {dtype}" for col, dtype in cols]
