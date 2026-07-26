@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: raw
     description: "Raw transactional data ingested from SQL Server OLTP database into DuckDB staging via DLT pipeline."
-    schema: main
+    schema: xom_ecom
     tables:
       - name: customer
         description: "Raw customer source table."
@@ -34,13 +34,11 @@ models:
         description: "Unique order transaction identifier."
       - name: customer_id
         description: "Foreign key referencing the customer."
-      - name: order_date
-        description: "Timestamp when order was placed."
 
   - name: bronze_product
     description: "Bronze Layer: Raw product catalog staging table."
     columns:
-      - name: product_id
+      - name: product_code
         description: "Unique product catalog SKU identifier."
         tests:
           - not_null
@@ -48,5 +46,5 @@ models:
   - name: bronze_region
     description: "Bronze Layer: Raw geographic location staging table."
     columns:
-      - name: country_id
-        description: "Unique country reference identifier."
+      - name: region_code
+        description: "Unique region reference code."

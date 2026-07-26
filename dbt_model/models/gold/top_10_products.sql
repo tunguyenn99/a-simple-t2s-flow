@@ -1,8 +1,8 @@
--- Gold: top 10 products by order count
+-- Gold: top 10 products by unique order count
 select
     s.product_id,
     p.product_name,
-    count(*) as order_count,
+    count(distinct s.order_id) as order_count,
     sum(s.revenue) as revenue,
     sum(s.profit) as profit
 from {{ ref('silver_ecom_sales') }} as s

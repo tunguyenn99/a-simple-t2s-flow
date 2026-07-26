@@ -1,15 +1,17 @@
--- Gold: summary of Consumer vs Corporate share by market
+-- Gold: summary of Consumer vs Corporate distinct order share by market
 select
     market,
-    sum(case when segment = 'Consumer' then 1 else 0 end) as consumer_orders,
-    sum(case when segment = 'Corporate' then 1 else 0 end) as corporate_orders,
-    count(*) as total_orders,
-    sum(case when segment = 'Consumer' then 1 else 0 end)
+    count(distinct case when segment = 'Consumer' then order_id end)
+        as consumer_orders,
+    count(distinct case when segment = 'Corporate' then order_id end)
+        as corporate_orders,
+    count(distinct order_id) as total_orders,
+    count(distinct case when segment = 'Consumer' then order_id end)
     * 1.0
-    / nullif(count(*), 0) as consumer_share,
-    sum(case when segment = 'Corporate' then 1 else 0 end)
+    / nullif(count(distinct order_id), 0) as consumer_share,
+    count(distinct case when segment = 'Corporate' then order_id end)
     * 1.0
-    / nullif(count(*), 0) as corporate_share
+    / nullif(count(distinct order_id), 0) as corporate_share
 from {{ ref('silver_ecom_sales') }}
 group by market
 order by total_orders desc

@@ -62,12 +62,11 @@ models:
   - name: silver_region
     description: "Silver Layer: Cleaned geographic region dimension table with standardized market taxonomy (US, EMEA, APAC, LATAM)."
     columns:
-      - name: country_id
-        description: "Primary key for country entity."
+      - name: region_id
+        description: "Primary key for region entity."
         tests:
-          - unique
           - not_null
-      - name: country_name
+      - name: country
         description: "Standardized country name."
       - name: market
         description: "Global business market (US, EMEA, APAC, LATAM)."

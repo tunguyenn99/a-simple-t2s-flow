@@ -23,6 +23,7 @@ def generate_sql_gemini(user_prompt: str, schema_ddl: str) -> str:
             "1. Output ONLY the raw SQL code block or raw SQL string. Do NOT include markdown text outside sql block.\n"
             "2. Prefer using Silver models (main.silver_ecom_sales, main.silver_customer, etc.) or Gold analytics models (main.total_revenue_profit, main.top_10_products, main.revenue_by_segment, main.customer_rfm_segments, main.vip_churn_risk, main.monthly_revenue_yoy, main.profit_margin_by_market) for queries.\n"
             "3. Do NOT execute any mutation queries (NO INSERT, UPDATE, DELETE, DROP, ALTER).\n"
+            "4. Always use COUNT(DISTINCT column_name) when counting unique entities (e.g. COUNT(DISTINCT order_id) for orders, COUNT(DISTINCT customer_id) for customers).\n"
             f"\n--- DATABASE SCHEMA DDL ---\n{schema_ddl}\n"
         )
 
