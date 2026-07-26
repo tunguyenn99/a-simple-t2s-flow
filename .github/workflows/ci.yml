@@ -1,0 +1,43 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  quality-and-test:
+    name: Code Quality & dbt Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+
+      - name: Check Python Code Formatting (Black)
+        run: |
+          black --check text2sql/ ingestion/ docs/ orchestration/
+
+      - name: Check SQL Formatting & Linting (SQLFluff)
+        run: |
+          sqlfluff lint dbt_model/models
+
+      - name: Verify dbt Compilation
+        run: |
+          dbt compile --project-dir dbt_model --profiles-dir dbt_model
+
+      - name: Execute dbt Data Quality Tests
+        run: |
+          dbt test --project-dir dbt_model --profiles-dir dbt_model
