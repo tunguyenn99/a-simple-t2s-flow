@@ -16,6 +16,14 @@ dependencies = [
     "sqlglot"
 ]
 
+[project.optional-dependencies]
+dev = [
+    "black",
+    "sqlfluff",
+    "sqlfluff-templater-dbt",
+    "dbt-duckdb"
+]
+
 [project.scripts]
 text2sql = "text2sql.cli:main"
 t2s = "text2sql.cli:main"
